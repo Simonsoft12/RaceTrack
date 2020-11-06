@@ -11,15 +11,21 @@ var boundaryLeftOffset = 2;
 var boundaryPadding = 50;
 var boundaryMiddleOffset = 2;
 var speed = 50;
+let executedTimer = false;
+let dateDiff;
 
 var leftBoundary = [];
 var rightBoundary = [];
 var middleBoundary = [];
+var bonuses = [];
+
+var obstacles = [];
 
 var car = {
   x: 1200,
   y: 800
 }
+
 
 document.addEventListener('keydown', function(event) {
   let key = event.which
@@ -68,6 +74,10 @@ var cycle = 0,
 window.requestAnimationFrame(draw); 
 
 function draw() {
+  if(executedTimer == false) {
+    obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
+    timerStart();
+}
     drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
     cycle = (cycle + 1) % totalCycle;
 
@@ -77,7 +87,12 @@ function draw() {
             drawBoundary(boundary[i], boundary[i].color);
         }
     }
+    if(dateDiff >= 4000) {
+      obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
+  } 
+    drawObstacle();
     drawCar();
+    timerCheck();
     window.requestAnimationFrame(draw);
 }
 
@@ -103,4 +118,28 @@ function drawCar() {
     c.fill();
     c.closePath();
   }
+}
+
+function timerStart() {
+  date1  = new Date();
+  executedTimer = true;
+}
+
+function timerCheck() {
+  var date2  = new Date();
+  dateDiff = Math.abs(date1 - date2);
+  if(dateDiff >= 4000)date1 = date2;
+}
+
+function drawObstacle() {
+  c.fillStyle = "#080D23";
+  for(obstacle of [obstacles]) {
+    for (i = 0; i < obstacles.length; i++) {
+      c.fillRect(obstacle[i].x, obstacle[i].y++, 80, 50);
+    }
+  }
+}
+
+function drawBonus() {
+
 }
