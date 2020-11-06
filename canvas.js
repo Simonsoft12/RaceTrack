@@ -13,6 +13,7 @@ var boundaryMiddleOffset = 2;
 var speed = 50;
 let executedTimer = false;
 let dateDiff;
+let currentScore = 0;
 
 var leftBoundary = [];
 var rightBoundary = [];
@@ -74,12 +75,13 @@ var cycle = 0,
 window.requestAnimationFrame(draw); 
 
 function draw() {
+
   if(executedTimer == false) {
     obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
     timerStart();
 }
     drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
-    cycle = (cycle + 1) % totalCycle;
+    cycle = (cycle + 4) % totalCycle;
 
     for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
         for (i = 0; i < boundary.length; i++) {
@@ -87,13 +89,15 @@ function draw() {
             drawBoundary(boundary[i], boundary[i].color);
         }
     }
-    if(dateDiff >= 4000) {
+    if(dateDiff >= 1000) {
       obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
   } 
-    drawObstacle();
-    drawCar();
-    timerCheck();
-    window.requestAnimationFrame(draw);
+  drawScore();
+  drawObstacle();
+  drawCar();
+  obstacleColissionChecker();
+  timerCheck();
+  window.requestAnimationFrame(draw);
 }
 
 function drawBoundary(x, elementColor) {
@@ -128,17 +132,34 @@ function timerStart() {
 function timerCheck() {
   var date2  = new Date();
   dateDiff = Math.abs(date1 - date2);
-  if(dateDiff >= 4000)date1 = date2;
+  if(dateDiff >= 1000)date1 = date2;
+}
+
+function drawScore() {
+  c.font='25px Verdana';
+  c.fillStyle = 'hsl('+ 0 +', 100%, 50%)';
+  c.fillText('Score : ' + currentScore, 100, 80);    
 }
 
 function drawObstacle() {
   c.fillStyle = "#080D23";
   for(obstacle of [obstacles]) {
     for (i = 0; i < obstacles.length; i++) {
-      c.fillRect(obstacle[i].x, obstacle[i].y++, 80, 50);
+      c.fillRect(obstacle[i].x, obstacle[i].y+= 5, 80, 50);
     }
   }
 }
+
+function obstacleColissionChecker() {
+        for (i = 0; i < obstacles.length; i++) {
+          if(car.y - 20 - obstacles[i]?.y - 20 > 0 && car.y - 20 - obstacles[i]?.y + 20 < 100 
+              && car.x + 20 - obstacles[i]?.x + 20 > 0 && car.x + 20 - obstacles[i]?.x + 20 < 100
+              ) {
+              currentScore--;
+          }
+        }
+      
+  }
 
 function drawBonus() {
 
