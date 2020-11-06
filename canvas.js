@@ -19,7 +19,6 @@ var leftBoundary = [];
 var rightBoundary = [];
 var middleBoundary = [];
 var bonuses = [];
-
 var obstacles = [];
 
 var car = {
@@ -30,11 +29,15 @@ var car = {
 
 document.addEventListener('keydown', function(event) {
   let key = event.which
-      if(key === 37) {
-          car.x -= speed;
-      } else if(key === 39) {
-          car.x += speed;
-      }
+  if(key === 37) {
+    car.x -= speed;
+  } else if(key === 39) {
+    car.x += speed;
+  } else if(key === 38) {
+    car.y -= speed;
+  } else if(key === 40) {
+    car.y += speed;
+  }
 })
 
 for (x = 0; x < 8; x++) { 
@@ -91,7 +94,7 @@ function draw() {
     }
     if(dateDiff >= 1000) {
       obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
-  } 
+    } 
   drawScore();
   drawObstacle();
   drawCar();
