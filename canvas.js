@@ -10,6 +10,7 @@ var boundaryTopOffset = 5;
 var boundaryLeftOffset = 2; 
 var boundaryPadding = 50;
 var boundaryMiddleOffset = 2;
+var speed = 50;
 
 var leftBoundary = [];
 var rightBoundary = [];
@@ -20,7 +21,14 @@ var car = {
   y: 800
 }
 
-window.requestAnimationFrame(draw); 
+document.addEventListener('keydown', function(event) {
+  let key = event.which
+      if(key === 37) {
+          car.x -= speed;
+      } else if(key === 39) {
+          car.x += speed;
+      }
+})
 
 for (x = 0; x < 8; x++) { 
   leftBoundary[x] = 
@@ -56,6 +64,8 @@ for (x = 0; x < 8; x++) {
 }
 var cycle = 0,
     totalCycle = LineHeight + boundaryPadding;
+
+window.requestAnimationFrame(draw); 
 
 function draw() {
     drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
