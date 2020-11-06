@@ -94,11 +94,14 @@ function draw() {
     }
     if(dateDiff >= 1000) {
       obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
+      bonuses.push({x: Math.floor((Math.random() * 900) + 490), y: 10})
     } 
   drawScore();
   drawObstacle();
+  drawBonus();
   drawCar();
   obstacleColissionChecker();
+  bonusColissionChecker();
   timerCheck();
   window.requestAnimationFrame(draw);
 }
@@ -153,17 +156,32 @@ function drawObstacle() {
   }
 }
 
-function obstacleColissionChecker() {
-        for (i = 0; i < obstacles.length; i++) {
-          if(car.y - 20 - obstacles[i]?.y - 20 > 0 && car.y - 20 - obstacles[i]?.y + 20 < 100 
-              && car.x + 20 - obstacles[i]?.x + 20 > 0 && car.x + 20 - obstacles[i]?.x + 20 < 100
-              ) {
-              currentScore--;
-          }
-        }
-      
-  }
-
 function drawBonus() {
+  c.fillStyle = "#F2C14A";
+  for(bonus of [bonuses]) {
+    for (i = 0; i < bonuses.length; i++) {
+      c.beginPath();
+      c.arc(bonuses[i].x, bonuses[i].y+= 5, 20, 0, Math.PI * 2, false);
+      c.fill();
+      c.closePath();
+    }
+  }
+}
 
+function obstacleColissionChecker() {
+  for (i = 0; i < obstacles.length; i++) {
+    if(car.y + 20 - obstacles[i]?.y + 20 > 0 && car.y - 20 - obstacles[i]?.y + 20 < 100 
+      && car.x + 100 - obstacles[i]?.x + 20 > 0 && car.x - 100 - obstacles[i]?.x - 20 < 200) {
+        currentScore--;
+      }
+  }
+}
+
+function bonusColissionChecker() {
+  for (i = 0; i < bonuses.length; i++) {
+    if(car.y + 20 - bonuses[i]?.y + 20 > 0 && car.y - 20 - bonuses[i]?.y + 20 < 100 
+      && car.x + 100 - bonuses[i]?.x + 20 > 0 && car.x - 100 - bonuses[i]?.x - 20 < 200) {
+        currentScore++;
+      }
+  }
 }
