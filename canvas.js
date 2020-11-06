@@ -9,40 +9,57 @@ var LineHeight = 80;
 var boundaryTopOffset = 5;
 var boundaryLeftOffset = 2; 
 var boundaryPadding = 50;
+var boundaryMiddleOffset = 2;
 
 var leftBoundary = [];
 var rightBoundary = [];
+var middleBoundary = [];
 
 window.requestAnimationFrame(draw); 
 
 for (x = 0; x < 8; x++) { 
-  leftBoundary[x] = {
+  leftBoundary[x] = 
+  {
     offset: boundaryLeftOffset + 400,
     topOffset: 0,
     width: LineWidth,
-    height: LineHeight
+    height: LineHeight,
+    color: "red"
+  };
+}
+
+for (x = 0; x < 8; x++) { 
+  middleBoundary[x] = 
+  {
+    offset: boundaryMiddleOffset + 890,
+    topOffset: 0,
+    width: LineWidth,
+    height: LineHeight,
+    color: "white"
   };
 }
 
 for (x = 0; x < 8; x++) {
-  rightBoundary[x] = {
-    offset: boundaryLeftOffset + 1440,
+  rightBoundary[x] = 
+  {
+    offset: boundaryLeftOffset + 1400,
     topOffset: 0,
     width: LineWidth,
-    height: LineHeight
+    height: LineHeight,
+    color: "red"
   };
 }
 var cycle = 0,
     totalCycle = LineHeight + boundaryPadding;
 
 function draw() {
-    drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'black');
+    drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
     cycle = (cycle + 1) % totalCycle;
 
-    for (boundary of [leftBoundary, rightBoundary]) {
+    for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
         for (i = 0; i < boundary.length; i++) {
             boundary[i].topOffset = cycle + (i-1) * totalCycle;
-            drawBoundary(boundary[i], 'white');
+            drawBoundary(boundary[i], boundary[i].color);
         }
     }
     window.requestAnimationFrame(draw);
