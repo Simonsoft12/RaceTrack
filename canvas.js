@@ -15,6 +15,11 @@ var leftBoundary = [];
 var rightBoundary = [];
 var middleBoundary = [];
 
+var car = {
+  x: 1200,
+  y: 800
+}
+
 window.requestAnimationFrame(draw); 
 
 for (x = 0; x < 8; x++) { 
@@ -62,6 +67,7 @@ function draw() {
             drawBoundary(boundary[i], boundary[i].color);
         }
     }
+    drawCar();
     window.requestAnimationFrame(draw);
 }
 
@@ -74,4 +80,17 @@ function drawBoundary(x, elementColor) {
 function drawCanvas(posX, posY, width, height, elementColor) {
   c.fillStyle = elementColor;
   c.fillRect(posX, posY, width, height);
+}
+
+function drawCar() {
+  c.fillStyle = "blue";
+  c.fillRect(car.x, car.y, 100, 150);
+  c.fillStyle = "black";
+  for(var i = 0; i < 101; i+=100){
+    c.beginPath();
+    c.ellipse(car.x + i, car.y + 10, 10, 15, Math.PI, 0, 2 * Math.PI);
+    c.ellipse(car.x + i, car.y + 140, 10, 15, Math.PI, 0, 2 * Math.PI);
+    c.fill();
+    c.closePath();
+  }
 }
