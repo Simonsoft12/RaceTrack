@@ -14,6 +14,7 @@ var speed = 50;
 let executedTimer = false;
 let dateDiff;
 let currentScore = 0;
+let bullets = [];
 
 var leftBoundary = [];
 var rightBoundary = [];
@@ -37,7 +38,10 @@ document.addEventListener('keydown', function(event) {
     car.y -= speed;
   } else if(key === 40) {
     car.y += speed;
-  }
+  } else if(key === 32) {
+    // SPACJA - Strzelanie
+    bullets.push({  x: car.x+50, y: car.y-50 });
+}
 })
 
 for (x = 0; x < 8; x++) { 
@@ -100,8 +104,11 @@ function draw() {
   drawObstacle();
   drawBonus();
   drawCar();
+  DrawBullets();
+  MoveBullets();
   obstacleColissionChecker();
   bonusColissionChecker();
+  bulletHitObstacle();
   timerCheck();
   window.requestAnimationFrame(draw);
 }
@@ -151,6 +158,7 @@ function drawObstacle() {
   c.fillStyle = "#080D23";
   for(obstacle of [obstacles]) {
     for (i = 0; i < obstacles.length; i++) {
+      if (obstacles.hasOwnProperty(i)) 
       c.fillRect(obstacle[i].x, obstacle[i].y+= 5, 80, 50);
     }
   }
@@ -182,6 +190,39 @@ function bonusColissionChecker() {
     if(car.y + 20 - bonuses[i]?.y + 20 > 0 && car.y - 20 - bonuses[i]?.y + 20 < 100 
       && car.x + 100 - bonuses[i]?.x + 20 > 0 && car.x - 100 - bonuses[i]?.x - 20 < 200) {
         currentScore++;
+      }
+  }
+}
+
+function bulletHitObstacle() {
+  for (let i in bullets) {
+    for(let o in obstacles) {
+        if(bullets[i].y - 25 - obstacles[o].y - 25 > 0 && bullets[i].y - 25 - obstacles[o].y + 25 < 100 
+            && bullets[i].x + 40 - obstacles[o].x + 40 > 0 && bullets[i].x + 40 - obstacles[o].x + 40 < 100
+            ) {
+            delete obstacles[o];
+            currentScore+=20;
+        }
+    }
+  }
+}
+
+function DrawBullets(){
+  for (let i in bullets) {
+      if (bullets.hasOwnProperty(i)) {
+          c.beginPath();
+          c.arc(bullets[i].x, bullets[i].y, 25, 0, 2 * Math.PI);
+          c.fillStyle = 'darkorange';
+          c.fill();
+          c.closePath();
+      }
+  }
+}
+
+function MoveBullets(){
+  for (let i in bullets) {
+      if (bullets.hasOwnProperty(i)) {
+          bullets[i].y -= 7;
       }
   }
 }
