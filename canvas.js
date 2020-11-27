@@ -15,6 +15,7 @@ let executedTimer = false;
 let dateDiff;
 let currentScore = 0;
 let bullets = [];
+let linespeed = 4;
 
 var leftBoundary = [];
 var rightBoundary = [];
@@ -26,7 +27,6 @@ var car = {
   x: 1200,
   y: 800
 }
-
 
 document.addEventListener('keydown', function(event) {
   let key = event.which
@@ -40,9 +40,13 @@ document.addEventListener('keydown', function(event) {
     car.y += speed;
   } else if(key === 32) {
     // SPACJA - Strzelanie
-    bullets.push({  x: car.x+50, y: car.y-50 });
+    bulletsPush();
 }
 })
+
+function bulletsPush() {
+  bullets.push({  x: car.x+50, y: car.y-50 });
+}
 
 for (x = 0; x < 8; x++) { 
   leftBoundary[x] = 
@@ -88,7 +92,7 @@ function draw() {
     timerStart();
 }
     drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
-    cycle = (cycle + 4) % totalCycle;
+    cycle = (cycle + linespeed) % totalCycle;
 
     for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
         for (i = 0; i < boundary.length; i++) {
