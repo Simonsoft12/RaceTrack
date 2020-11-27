@@ -17,24 +17,22 @@
 </head>
 <body>
     <br/>
-    <a style ="margin-left: 5%" href="https://simonsoft12.github.io/RaceTrack/">html - github pages</a>
+    <a style ="margin-left: 5%;" href="https://simonsoft12.github.io/RaceTrack/">html - github pages</a>
     <div style="position: fixed; top: 10%; left: 20%;"> 
         <canvas style="width:800px; height:600px; position: absolute;"></canvas>
     </div>
-    <button style="margin-left: 450px;
-    margin-top: 700px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 50%;
-    cursor: pointer;" onclick="bulletsPush()">Shoot</button>
+    <div class ='circleBase' id='rotateMode' style="margin-top:700px; margin-left:600px">
+        <button id="left" onclick="turnLeft()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        <button id="right" onclick="turnRight()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        <button id="middle" onclick="bulletsPush()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-record"></span></button>
+        <button id="up" onclick="goDown()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button id="down" onclick="goUp()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
+    </div>
     
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="canvas.js"></script>
 </body>
 

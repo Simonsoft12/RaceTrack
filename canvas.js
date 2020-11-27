@@ -31,18 +31,34 @@ var car = {
 document.addEventListener('keydown', function(event) {
   let key = event.which
   if(key === 37) {
-    car.x -= speed;
+    turnLeft();
   } else if(key === 39) {
-    car.x += speed;
+    turnRight();
   } else if(key === 38) {
-    car.y -= speed;
+    goDown();
   } else if(key === 40) {
-    car.y += speed;
+    goUp();
   } else if(key === 32) {
     // SPACJA - Strzelanie
     bulletsPush();
 }
 })
+
+function goDown() {
+  car.y -= speed;
+}
+
+function goUp() {
+  car.y += speed;
+}
+
+function turnRight(){
+  car.x += speed;
+}
+
+function turnLeft(){
+  car.x -= speed;
+}
 
 function bulletsPush() {
   bullets.push({  x: car.x+50, y: car.y-50 });
