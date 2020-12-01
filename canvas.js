@@ -14,54 +14,20 @@ var speed = 50;
 let executedTimer = false;
 let dateDiff;
 let currentScore = 0;
-let bullets = [];
 let linespeed = 4;
+var cycle = 0, totalCycle = LineHeight + boundaryPadding;
 
 var leftBoundary = [];
 var rightBoundary = [];
 var middleBoundary = [];
+let bullets = [];
 var bonuses = [];
 var obstacles = [];
+var keys = {};
 
 var car = {
   x: 1200,
   y: 800
-}
-
-document.addEventListener('keydown', function(event) {
-  let key = event.which
-  if(key === 37) {
-    turnLeft();
-  } else if(key === 39) {
-    turnRight();
-  } else if(key === 38) {
-    goDown();
-  } else if(key === 40) {
-    goUp();
-  } else if(key === 32) {
-    // SPACJA - Strzelanie
-    bulletsPush();
-}
-})
-
-function goDown() {
-  car.y -= speed;
-}
-
-function goUp() {
-  car.y += speed;
-}
-
-function turnRight(){
-  car.x += speed;
-}
-
-function turnLeft(){
-  car.x -= speed;
-}
-
-function bulletsPush() {
-  bullets.push({  x: car.x+50, y: car.y-50 });
 }
 
 for (x = 0; x < 8; x++) { 
@@ -96,41 +62,81 @@ for (x = 0; x < 8; x++) {
     color: "red"
   };
 }
-var cycle = 0,
-    totalCycle = LineHeight + boundaryPadding;
 
-window.requestAnimationFrame(draw); 
+window.requestAnimationFrame(animate); 
 
-function draw() {
+function animate() {
 
   if(executedTimer == false) {
     obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
     timerStart();
-}
-    drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
-    cycle = (cycle + linespeed) % totalCycle;
+  }
+  drawCanvas(boundaryLeftOffset-2, 0, canvas.width, canvas.height, 'grey');
+  cycle = (cycle + linespeed) % totalCycle;
 
-    for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
-        for (i = 0; i < boundary.length; i++) {
-            boundary[i].topOffset = cycle + (i-1) * totalCycle;
-            drawBoundary(boundary[i], boundary[i].color);
-        }
+  for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
+    for (i = 0; i < boundary.length; i++) {
+      boundary[i].topOffset = cycle + (i-1) * totalCycle;
+      drawBoundary(boundary[i], boundary[i].color);
     }
-    if(dateDiff >= 1000) {
-      obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
-      bonuses.push({x: Math.floor((Math.random() * 900) + 490), y: 10})
-    } 
+  }
+  if(dateDiff >= 1000) {
+    obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
+    bonuses.push({x: Math.floor((Math.random() * 900) + 490), y: 10})
+  } 
+
   drawScore();
   drawObstacle();
   drawBonus();
-  drawCar();
   DrawBullets();
   MoveBullets();
   obstacleColissionChecker();
   bonusColissionChecker();
   bulletHitObstacle();
+  update();
+  draw();
   timerCheck();
-  window.requestAnimationFrame(draw);
+  
+  window.requestAnimationFrame(animate);
+}
+
+
+
+window.addEventListener('keydown', function (e) {
+  let key = event.which
+  keys[e.keyCode] = true;
+  e.preventDefault();
+
+  if(key === 32) {
+    // SPACJA - Strzelanie
+    bulletsPush();
+  }
+});
+
+window.addEventListener('keyup', function (e) {
+  delete keys[e.keyCode];
+});
+
+function leftKeyPressed() {
+  keys[37] = true;
+  e.preventDefault();
+}
+
+function leftKeyReleased() {
+  delete keys[37];
+}
+
+function rightKeyPressed() {
+  keys[39] = true;
+  e.preventDefault();
+}
+
+function rightKeyReleased() {
+  delete keys[39];
+}
+
+function bulletsPush() {
+  bullets.push({  x: player.x+50, y: player.y-50 });
 }
 
 function drawBoundary(x, elementColor) {
@@ -138,23 +144,9 @@ function drawBoundary(x, elementColor) {
   c.fillRect(x.offset+100, x.topOffset, x.width, x.height);
 }
 
-
 function drawCanvas(posX, posY, width, height, elementColor) {
   c.fillStyle = elementColor;
   c.fillRect(posX, posY, width, height);
-}
-
-function drawCar() {
-  c.fillStyle = "blue";
-  c.fillRect(car.x, car.y, 100, 150);
-  c.fillStyle = "black";
-  for(var i = 0; i < 101; i+=100){
-    c.beginPath();
-    c.ellipse(car.x + i, car.y + 10, 10, 15, Math.PI, 0, 2 * Math.PI);
-    c.ellipse(car.x + i, car.y + 140, 10, 15, Math.PI, 0, 2 * Math.PI);
-    c.fill();
-    c.closePath();
-  }
 }
 
 function timerStart() {
@@ -169,9 +161,9 @@ function timerCheck() {
 }
 
 function drawScore() {
-  c.font='25px Verdana';
-  c.fillStyle = 'hsl('+ 0 +', 100%, 50%)';
-  c.fillText('Score : ' + currentScore, 100, 80);    
+  c.font='40px Verdana';
+  c.fillStyle = 'hsl('+ 0 +', 90%, 50%)';
+  c.fillText('Score : ' + currentScore, 90, 80);    
 }
 
 function drawObstacle() {
@@ -188,18 +180,20 @@ function drawBonus() {
   c.fillStyle = "#F2C14A";
   for(bonus of [bonuses]) {
     for (i = 0; i < bonuses.length; i++) {
-      c.beginPath();
-      c.arc(bonuses[i].x, bonuses[i].y+= 5, 20, 0, Math.PI * 2, false);
-      c.fill();
-      c.closePath();
+      if (bonuses.hasOwnProperty(i)){
+        c.beginPath();
+        c.arc(bonuses[i].x, bonuses[i].y+= 5, 20, 0, Math.PI * 2, false);
+        c.fill();
+        c.closePath();
+      }
     }
   }
 }
 
 function obstacleColissionChecker() {
   for (i = 0; i < obstacles.length; i++) {
-    if(car.y + 20 - obstacles[i]?.y + 20 > 0 && car.y - 20 - obstacles[i]?.y + 20 < 100 
-      && car.x + 100 - obstacles[i]?.x + 20 > 0 && car.x - 100 - obstacles[i]?.x - 20 < 200) {
+    if(player.y + 20 - obstacles[i]?.y + 20 > 0 && player.y - 20 - obstacles[i]?.y + 20 < 50 
+      && player.x + 50 - obstacles[i]?.x + 20 > 0 && player.x - 50 - obstacles[i]?.x - 20 < 50) {
         currentScore--;
       }
   }
@@ -207,9 +201,10 @@ function obstacleColissionChecker() {
 
 function bonusColissionChecker() {
   for (i = 0; i < bonuses.length; i++) {
-    if(car.y + 20 - bonuses[i]?.y + 20 > 0 && car.y - 20 - bonuses[i]?.y + 20 < 100 
-      && car.x + 100 - bonuses[i]?.x + 20 > 0 && car.x - 100 - bonuses[i]?.x - 20 < 200) {
+    if(player.y + 20 - bonuses[i]?.y + 20 > 0 && player.y - 20 - bonuses[i]?.y + 20 < 50 
+      && player.x + 50 - bonuses[i]?.x + 20 > 0 && player.x - 50 - bonuses[i]?.x - 20 < 50) {
         currentScore++;
+        delete bonuses[i];
       }
   }
 }
@@ -217,12 +212,11 @@ function bonusColissionChecker() {
 function bulletHitObstacle() {
   for (let i in bullets) {
     for(let o in obstacles) {
-        if(bullets[i].y - 25 - obstacles[o].y - 25 > 0 && bullets[i].y - 25 - obstacles[o].y + 25 < 100 
-            && bullets[i].x + 40 - obstacles[o].x + 40 > 0 && bullets[i].x + 40 - obstacles[o].x + 40 < 100
-            ) {
-            delete obstacles[o];
-            currentScore+=20;
-        }
+      if(bullets[i].y + 20 - obstacles[o].y + 20 > 0 && bullets[i].y - 25 - obstacles[o].y + 20 < 50 
+        && bullets[i].x + 20 - obstacles[o].x + 20 > 0 && bullets[i].x - 50 - obstacles[o].x - 20 < 50 ) {
+          delete obstacles[o];
+          currentScore += 20;
+      }
     }
   }
 }
@@ -245,4 +239,55 @@ function MoveBullets(){
           bullets[i].y -= 7;
       }
   }
+}
+
+function Box(options) {
+  this.x = options.x || 1100;
+  this.y = options.y || 900;
+  this.width = options.width || 40;
+  this.height = options.height || 50;
+  this.color = options.color || '#000000'
+  this.speed = options.speed || 5;
+  this.direction = options.direction || 'right';
+}
+
+var player = new Box({
+  X: 10,
+  y: 900,
+  width: 100,
+  height: 50,
+  color: '#44ee11',
+  speed: 15
+});
+
+function input(player) {
+  if (37 in keys) {
+    player.x -= player.speed;
+    player.direction = 'left';
+  }
+  if (39 in keys) {
+    player.x += player.speed;
+    player.direction = 'right';
+  }
+  if (38 in keys) {
+    player.y -= player.speed;
+    player.direction = 'up';
+  }
+  if (40 in keys) {
+    player.y += player.speed;
+    player.direction = 'down';
+  }
+}
+
+function drawBox(box) {
+  c.fillStyle = box.color;
+  c.fillRect(box.x, box.y, box.width, box.height);
+}
+
+function update() {
+  input(player);
+}
+
+function draw() {
+  drawBox(player);
 }
