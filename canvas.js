@@ -136,7 +136,7 @@ function rightKeyReleased() {
 }
 
 function bulletsPush() {
-  bullets.push({  x: player.x+50, y: player.y-50 });
+  bullets.push({  x: player.x+20, y: player.y-50 });
 }
 
 function drawBoundary(x, elementColor) {
@@ -167,26 +167,41 @@ function drawScore() {
 }
 
 function drawObstacle() {
-  c.fillStyle = "#080D23";
   for(obstacle of [obstacles]) {
     for (i = 0; i < obstacles.length; i++) {
-      if (obstacles.hasOwnProperty(i)) 
-      c.fillRect(obstacle[i].x, obstacle[i].y+= 5, 80, 50);
+      if (obstacles.hasOwnProperty(i)) {
+        var image = document.getElementById("obstacle");
+        c.drawImage(image, obstacle[i].x, obstacle[i].y+= 5);
+      }
     }
   }
 }
 
 function drawBonus() {
-  c.fillStyle = "#F2C14A";
   for(bonus of [bonuses]) {
     for (i = 0; i < bonuses.length; i++) {
       if (bonuses.hasOwnProperty(i)){
-        c.beginPath();
-        c.arc(bonuses[i].x, bonuses[i].y+= 5, 20, 0, Math.PI * 2, false);
-        c.fill();
-        c.closePath();
+        var image = document.getElementById("bonus");
+        c.drawImage(image, bonuses[i].x, bonuses[i].y+= 5);
       }
     }
+  }
+}
+
+function DrawBullets(){
+  for (let i in bullets) {
+      if (bullets.hasOwnProperty(i)) {
+        var image = document.getElementById("bullet");
+        c.drawImage(image, bullets[i].x, bullets[i].y);
+      }
+  }
+}
+
+function MoveBullets(){
+  for (let i in bullets) {
+      if (bullets.hasOwnProperty(i)) {
+          bullets[i].y -= 7;
+      }
   }
 }
 
@@ -194,16 +209,16 @@ function obstacleColissionChecker() {
   for (i = 0; i < obstacles.length; i++) {
     if(player.y + 20 - obstacles[i]?.y + 20 > 0 && player.y - 20 - obstacles[i]?.y + 20 < 50 
       && player.x + 50 - obstacles[i]?.x + 20 > 0 && player.x - 50 - obstacles[i]?.x - 20 < 50) {
-        currentScore--;
+        currentScore -= 5;
       }
   }
 }
 
 function bonusColissionChecker() {
   for (i = 0; i < bonuses.length; i++) {
-    if(player.y + 20 - bonuses[i]?.y + 20 > 0 && player.y - 20 - bonuses[i]?.y + 20 < 50 
-      && player.x + 50 - bonuses[i]?.x + 20 > 0 && player.x - 50 - bonuses[i]?.x - 20 < 50) {
-        currentScore++;
+    if(player.y - bonuses[i]?.y > 0 && player.y - bonuses[i]?.y < 50 
+      && player.x - bonuses[i]?.x > -150 && player.x - bonuses[i]?.x < 50) {
+        currentScore += 30;
         delete bonuses[i];
       }
   }
@@ -221,26 +236,6 @@ function bulletHitObstacle() {
   }
 }
 
-function DrawBullets(){
-  for (let i in bullets) {
-      if (bullets.hasOwnProperty(i)) {
-          c.beginPath();
-          c.arc(bullets[i].x, bullets[i].y, 25, 0, 2 * Math.PI);
-          c.fillStyle = 'darkorange';
-          c.fill();
-          c.closePath();
-      }
-  }
-}
-
-function MoveBullets(){
-  for (let i in bullets) {
-      if (bullets.hasOwnProperty(i)) {
-          bullets[i].y -= 7;
-      }
-  }
-}
-
 function Box(options) {
   this.x = options.x || 1100;
   this.y = options.y || 900;
@@ -253,7 +248,7 @@ function Box(options) {
 
 var player = new Box({
   X: 10,
-  y: 900,
+  y: 800,
   width: 100,
   height: 50,
   color: '#44ee11',
@@ -280,8 +275,8 @@ function input(player) {
 }
 
 function drawBox(box) {
-  c.fillStyle = box.color;
-  c.fillRect(box.x, box.y, box.width, box.height);
+  var image = document.getElementById("car");
+  c.drawImage(image, box.x, box.y);
 }
 
 function update() {
