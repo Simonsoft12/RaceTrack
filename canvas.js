@@ -66,7 +66,7 @@ for (x = 0; x < 8; x++) {
 window.requestAnimationFrame(animate); 
 
 function animate() {
-
+  c.clearRect(0, 0, canvas.width, canvas.height);
   if(executedTimer == false) {
     obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
     timerStart();
