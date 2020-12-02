@@ -71,8 +71,7 @@ function animate() {
     obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
     timerStart();
   }
-  drawCanvas(boundaryLeftOffset-2, 0, canvas.width = window.innerWidth,
-  canvas.height = window.innerHeight, 'grey');
+  drawCanvas(boundaryLeftOffset-2, 0, window.innerWidth, window.innerHeight, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
 
   for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
