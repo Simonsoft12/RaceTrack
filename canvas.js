@@ -161,8 +161,8 @@ function timerCheck() {
 }
 
 function drawScore() {
-  c.font='40px Verdana';
-  c.fillStyle = 'hsl('+ 0 +', 90%, 50%)';
+  c.font='45px Comic Sans MS';
+  c.fillStyle = 'hsl('+ 0 +', 100%, 50%)';
   c.fillText('Score : ' + currentScore, 90, 80);    
 }
 
