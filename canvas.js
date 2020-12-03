@@ -1,8 +1,8 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 800;
+canvas.height = 600;
 
 var LineWidth = 10;
 var LineHeight = 80;
@@ -33,7 +33,7 @@ var car = {
 for (x = 0; x < 8; x++) { 
   leftBoundary[x] = 
   {
-    offset: boundaryLeftOffset + 400,
+    offset: boundaryLeftOffset - 20 ,
     topOffset: 0,
     width: LineWidth,
     height: LineHeight,
@@ -44,7 +44,7 @@ for (x = 0; x < 8; x++) {
 for (x = 0; x < 8; x++) { 
   middleBoundary[x] = 
   {
-    offset: boundaryMiddleOffset + 890,
+    offset: boundaryMiddleOffset + 300,
     topOffset: 0,
     width: LineWidth,
     height: LineHeight,
@@ -55,7 +55,7 @@ for (x = 0; x < 8; x++) {
 for (x = 0; x < 8; x++) {
   rightBoundary[x] = 
   {
-    offset: boundaryLeftOffset + 1400,
+    offset: boundaryLeftOffset + 600,
     topOffset: 0,
     width: LineWidth,
     height: LineHeight,
@@ -67,11 +67,11 @@ window.requestAnimationFrame(animate);
 
 function animate() {
   if(executedTimer == false) {
-    obstacles.push({x: Math.floor((Math.random() * 1000) + 450), y: 10});
+    obstacles.push({x: Math.floor((Math.random() * 670) + 30), y: 0});
     timerStart();
   }
   c.clearRect(0, 0, canvas.width, canvas.height);
-  drawCanvas(boundaryLeftOffset - 2, 0,window.innerWidth, window.innerHeight, 'grey');
+  drawCanvas(boundaryLeftOffset - 2, 0, 800, 600, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
 
   for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
@@ -81,8 +81,8 @@ function animate() {
     }
   }
   if(dateDiff >= 1000) {
-    obstacles.push({x: Math.floor((Math.random() * 900) + 490), y: 10});
-    bonuses.push({x: Math.floor((Math.random() * 900) + 490), y: 10})
+    obstacles.push({x: Math.floor((Math.random() * 670) + 30), y: 0});
+    bonuses.push({x: Math.floor((Math.random() * 670) + 30), y: 0})
   } 
 
   drawScore();
@@ -136,7 +136,7 @@ function rightKeyReleased() {
 }
 
 function bulletsPush() {
-  bullets.push({  x: player.x+20, y: player.y-50 });
+  bullets.push({  x: player.x+10, y: player.y-50 });
 }
 
 function drawBoundary(x, elementColor) {
@@ -161,9 +161,10 @@ function timerCheck() {
 }
 
 function drawScore() {
-  c.font='45px Comic Sans MS';
-  c.fillStyle = 'hsl('+ 0 +', 100%, 50%)';
-  c.fillText('Score : ' + currentScore, 90, 80);    
+  c.font='22px Comic Sans MS';
+  c.fillStyle = 'hsl(100%, 100%, 100%)';
+  c.fillText('Score : ', 5, 30);
+  c.fillText(currentScore, 20, 60);    
 }
 
 function drawObstacle() {
@@ -207,8 +208,8 @@ function MoveBullets(){
 
 function obstacleColissionChecker() {
   for (i = 0; i < obstacles.length; i++) {
-    if(player.y + 20 - obstacles[i]?.y + 20 > 0 && player.y - 20 - obstacles[i]?.y + 20 < 50 
-      && player.x + 50 - obstacles[i]?.x + 20 > 0 && player.x - 50 - obstacles[i]?.x - 20 < 50) {
+    if(player.y - obstacles[i]?.y > 0 && player.y - obstacles[i]?.y < 50 
+      && player.x - obstacles[i]?.x > -50 && player.x - obstacles[i]?.x  < 50) {
         currentScore -= 5;
       }
   }
@@ -217,7 +218,7 @@ function obstacleColissionChecker() {
 function bonusColissionChecker() {
   for (i = 0; i < bonuses.length; i++) {
     if(player.y - bonuses[i]?.y > 0 && player.y - bonuses[i]?.y < 50 
-      && player.x - bonuses[i]?.x > -150 && player.x - bonuses[i]?.x < 50) {
+      && player.x - bonuses[i]?.x > -50 && player.x - bonuses[i]?.x < 50) {
         currentScore += 30;
         delete bonuses[i];
       }
@@ -227,8 +228,8 @@ function bonusColissionChecker() {
 function bulletHitObstacle() {
   for (let i in bullets) {
     for(let o in obstacles) {
-      if(bullets[i].y + 20 - obstacles[o].y + 20 > 0 && bullets[i].y - 25 - obstacles[o].y + 20 < 50 
-        && bullets[i].x + 20 - obstacles[o].x + 20 > 0 && bullets[i].x - 50 - obstacles[o].x - 20 < 50 ) {
+      if(bullets[i].y - obstacles[o].y > 0 && bullets[i].y - obstacles[o].y < 50 
+        && bullets[i].x - obstacles[o].x > -50 && bullets[i].x - obstacles[o].x < 50 ) {
           delete obstacles[o];
           currentScore += 20;
       }
@@ -237,8 +238,8 @@ function bulletHitObstacle() {
 }
 
 function Box(options) {
-  this.x = options.x || 1100;
-  this.y = options.y || 900;
+  this.x = options.x || 450;
+  this.y = options.y || 10;
   this.width = options.width || 40;
   this.height = options.height || 50;
   this.color = options.color || '#000000'
@@ -247,12 +248,12 @@ function Box(options) {
 }
 
 var player = new Box({
-  X: 10,
-  y: 800,
+  X: 100,
+  y: 440,
   width: 100,
   height: 50,
   color: '#44ee11',
-  speed: 15
+  speed: 10
 });
 
 function input(player) {
