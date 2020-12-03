@@ -135,6 +135,24 @@ function rightKeyReleased() {
   delete keys[39];
 }
 
+function upKeyPressed() {
+  keys[38] = true;
+  e.preventDefault();
+}
+
+function upKeyReleased() {
+  delete keys[38];
+}
+
+function downKeyPressed() {
+  keys[40] = true;
+  e.preventDefault();
+}
+
+function downKeyReleased() {
+  delete keys[40];
+}
+
 function bulletsPush() {
   bullets.push({  x: player.x+10, y: player.y-50 });
 }
@@ -209,7 +227,7 @@ function MoveBullets(){
 function obstacleColissionChecker() {
   for (i = 0; i < obstacles.length; i++) {
     if(player.y - obstacles[i]?.y > 0 && player.y - obstacles[i]?.y < 50 
-      && player.x - obstacles[i]?.x > -50 && player.x - obstacles[i]?.x  < 50) {
+      && player.x - obstacles[i]?.x > -50 && player.x - obstacles[i]?.x  < 100) {
         currentScore -= 5;
       }
   }

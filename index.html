@@ -17,8 +17,7 @@
             position: relative;
             width: 800px;
             height: 600px;
-            margin-top: 3%;
-            margin-left: 20%;
+            margin:0 auto;
         }    
     </style>
 </head>
@@ -35,12 +34,13 @@
         <img id="car" src="car.png" />
     </div>
 
-    <div class ='circleBase' id='rotateMode' style="margin-top:2%; margin-left:35%">
+    <br/>
+    <div class ='circleBase' id='rotateMode' style="margin:0 auto;">
         <button id="left" onmousedown="leftKeyPressed()" onmouseup="leftKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
         <button id="right" onmousedown="rightKeyPressed()" onmouseup="rightKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
         <button id="middle" onclick="bulletsPush()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-record"></span></button>
-        <button id="up" onclick="input()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button id="down" onclick="input()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
+        <button id="up" onmousedown="upKeyPressed()" onmouseup="upKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button id="down" onmousedown="downKeyPressed()" onmouseup="downKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
     </div>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
