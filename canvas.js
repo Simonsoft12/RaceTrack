@@ -247,7 +247,7 @@ function bulletHitObstacle() {
   for (let i in bullets) {
     for(let o in obstacles) {
       if(bullets[i].y - obstacles[o].y > 0 && bullets[i].y - obstacles[o].y < 50 
-        && bullets[i].x - obstacles[o].x > -50 && bullets[i].x - obstacles[o].x < 50 ) {
+        && bullets[i].x - obstacles[o].x > -30 && bullets[i].x - obstacles[o].x < 100 ) {
           delete obstacles[o];
           currentScore += 20;
       }
