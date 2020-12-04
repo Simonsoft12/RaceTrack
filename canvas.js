@@ -20,6 +20,7 @@ var cycle = 0, totalCycle = LineHeight + boundaryPadding;
 var leftBoundary = [];
 var rightBoundary = [];
 var middleBoundary = [];
+var leftCurve = [];
 let bullets = [];
 var bonuses = [];
 var obstacles = [];
@@ -40,6 +41,15 @@ for (x = 0; x < 8; x++) {
     color: "red"
   };
 }
+
+leftCurve[0] = 
+  {
+    offset: boundaryMiddleOffset - 10,
+    topOffset: 4,
+    width: 320,
+    height: 10,
+    color: "red"
+  };
 
 for (x = 0; x < 8; x++) { 
   middleBoundary[x] = 
@@ -67,12 +77,14 @@ window.requestAnimationFrame(animate);
 
 function animate() {
   if(executedTimer == false) {
-    obstacles.push({x: Math.floor((Math.random() * 670) + 30), y: 0});
+    obstacles.push({x: Math.floor((Math.random() * 650) + 30), y: 0});
     timerStart();
   }
-  c.clearRect(0, 0, canvas.width, canvas.height);
   drawCanvas(boundaryLeftOffset - 2, 0, 800, 600, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
+
+  drawBoundary(leftCurve[0], leftCurve[0].color);
+  leftCurve[0].topOffset+=4;
 
   for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
     for (i = 0; i < boundary.length; i++) {
@@ -80,9 +92,10 @@ function animate() {
       drawBoundary(boundary[i], boundary[i].color);
     }
   }
+  
   if(dateDiff >= 1000) {
-    obstacles.push({x: Math.floor((Math.random() * 670) + 30), y: 0});
-    bonuses.push({x: Math.floor((Math.random() * 670) + 30), y: 0})
+    obstacles.push({x: Math.floor((Math.random() * 650) + 30), y: 0});
+    bonuses.push({x: Math.floor((Math.random() * 650) + 50), y: 0})
   } 
 
   drawScore();
@@ -159,6 +172,12 @@ function bulletsPush() {
 
 function drawBoundary(x, elementColor) {
   c.fillStyle = elementColor;
+    c.fillRect(x.offset+100, x.topOffset, x.width, x.height);
+}
+
+function drawCurve(x, elementColor) {
+  c.fillStyle = elementColor;
+  c.rotate(45 * Math.PI / 30);
   c.fillRect(x.offset+100, x.topOffset, x.width, x.height);
 }
 
