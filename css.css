@@ -1,7 +1,7 @@
 #rotateMode{
   border-radius: 50%;
-  width: 125px;
-  height: 125px;
+  width: 325px;
+  height: 325px;
   background-color: rgb(35, 165, 79);
   color:white;
   position:relative;
@@ -11,7 +11,7 @@
 #middle{
   position:absolute;
   top:50%;
-  left:45px;
+  left:145px;
   transform:translateY(-50%);
 }
 
