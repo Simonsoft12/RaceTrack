@@ -1,9 +1,8 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
-const width = 800;
-const height = 600;
-const pixelRatio = window.devicePixelRatio || 1;
+canvas.width = 800;
+canvas.height = 600;
 
 var LineWidth = 10;
 var LineHeight = 80;
@@ -26,18 +25,6 @@ let bullets = [];
 var bonuses = [];
 var obstacles = [];
 var keys = {};
-
-const scale = 4;
-
-canvas.width = scale * width * pixelRatio;
-canvas.height = scale * height * pixelRatio;
-
-canvas.style.width = `${scale * width}px`;
-canvas.style.height = `${scale * height}px`;
-
-c.mozImageSmoothingEnabled = false;
-c.imageSmoothingEnabled = false;
-c.scale(pixelRatio, pixelRatio);
 
 var car = {
   x: 1200,
