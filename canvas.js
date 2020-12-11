@@ -111,10 +111,6 @@ function animate() {
     bonuses.push({x: Math.floor((Math.random() * 650) + 50), y: 0})
   } 
 
-  if(dateDiff >= 500) {
-
-  } 
-
   drawScore();
   drawObstacle();
   drawBonus();
@@ -161,6 +157,7 @@ function rightKeyPressed() {
 }
 
 function rightKeyReleased() {
+  setTimeout(1000);
   delete keys[39];
 }
 
