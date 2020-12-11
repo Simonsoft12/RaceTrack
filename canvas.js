@@ -1,8 +1,9 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const width = 800;
+const height = 600;
+const pixelRatio = window.devicePixelRatio || 1;
 
 var LineWidth = 10;
 var LineHeight = 80;
@@ -25,6 +26,18 @@ let bullets = [];
 var bonuses = [];
 var obstacles = [];
 var keys = {};
+
+const scale = 4;
+
+canvas.width = scale * width * pixelRatio;
+canvas.height = scale * height * pixelRatio;
+
+canvas.style.width = `${scale * width}px`;
+canvas.style.height = `${scale * height}px`;
+
+c.mozImageSmoothingEnabled = false;
+c.imageSmoothingEnabled = false;
+c.scale(pixelRatio, pixelRatio);
 
 var car = {
   x: 1200,
@@ -80,7 +93,7 @@ function animate() {
     obstacles.push({x: Math.floor((Math.random() * 650) + 30), y: 0});
     timerStart();
   }
-  drawCanvas(boundaryLeftOffset - 2, 0, window.innerWidth, window.innerHeight, 'grey');
+  drawCanvas(boundaryLeftOffset - 2, 0, 800, 600, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
 
   drawBoundary(leftCurve[0], leftCurve[0].color);
