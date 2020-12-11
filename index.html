@@ -12,18 +12,11 @@
     padding: 0;
   }
         canvas {
-
             display: block;
         }
         body {
             margin: 0;
-        }
-        .outer {
-            position: relative;
-            width: 800px;
-            height: 600px;
-            margin:0 auto;
-        }   
+        }  
         #container {
             margin: 0 auto;
             width: 800px;
@@ -70,7 +63,7 @@
         function init(){
             var ltpc = document.getElementById('ltpcanvas');
             var context = ltpc.getContext('2d');
-            var myWidth = window.innerWidth - 5;
+            var myWidth = window.innerWidth - 15;
             var myHeight = window.innerHeight - 5;
             context.canvas.width = myWidth;
             context.canvas.height = myHeight;
