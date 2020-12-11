@@ -1,10 +1,6 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
-const width = 800;
-const height = 600;
-const pixelRatio = window.devicePixelRatio || 1;
-
 var LineWidth = 10;
 var LineHeight = 80;
 var boundaryTopOffset = 5;
@@ -27,13 +23,16 @@ var bonuses = [];
 var obstacles = [];
 var keys = {};
 
+const width = 800;
+const height = 600;
+const pixelRatio = window.devicePixelRatio || 1;
+
 canvas.width = width * pixelRatio;
 canvas.height = height * pixelRatio;
 
 canvas.style.width = `${width}px`;
 canvas.style.height = `${height}px`;
 
-// for sprites scaled up to retina resolution
 canvas.mozImageSmoothingEnabled = false;
 canvas.imageSmoothingEnabled = false;
 
@@ -154,10 +153,10 @@ function leftKeyReleased() {
 
 function rightKeyPressed() {
   keys[39] = true;
+  e.preventDefault();
 }
 
 function rightKeyReleased() {
-  setTimeout(1000);
   delete keys[39];
 }
 

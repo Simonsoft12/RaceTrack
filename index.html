@@ -45,11 +45,11 @@
     </div>
 
     <div class="circleBase" id="rotateMode" style="margin:0 auto;">
-        <button id="left" onclick="leftKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
-        <button id="right" ontouchstart="rightKeyPressed();" ontouchend="rightKeyReleased();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        <button id="left" onmousedown="leftKeyPressed();" onmouseup="leftKeyReleased();" ontouchstart="leftKeyPressed();" ontouchend="leftKeyReleased();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        <button id="right" onmousedown="rightKeyPressed();" onmouseup="rightKeyReleased();" ontouchstart="rightKeyPressed();" ontouchend="rightKeyReleased();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
         <button id="middle" onclick="bulletsPush()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-record"></span></button>
-        <button id="up" onclick="upKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button id="down" onclick="downKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
+        <button id="up" onmousedown="upKeyPressed();" onmouseup="upKeyReleased();" ontouchstart="upKeyPressed();" ontouchend="upKeyReleased();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button id="down" onmousedown="downKeyPressed();" onmouseup="downKeyReleased();" ontouchstart="downKeyPressed();" ontouchend="downKeyReleased();" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
     </div>
     
     
