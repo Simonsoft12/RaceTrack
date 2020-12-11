@@ -1,8 +1,8 @@
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
-canvas.width = 800;
-canvas.height = 600;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 var LineWidth = 10;
 var LineHeight = 80;
@@ -80,7 +80,7 @@ function animate() {
     obstacles.push({x: Math.floor((Math.random() * 650) + 30), y: 0});
     timerStart();
   }
-  drawCanvas(boundaryLeftOffset - 2, 0, 800, 600, 'grey');
+  drawCanvas(boundaryLeftOffset - 2, 0, window.innerWidth, window.innerHeight, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
 
   drawBoundary(leftCurve[0], leftCurve[0].color);
