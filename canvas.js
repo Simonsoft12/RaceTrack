@@ -34,7 +34,7 @@ canvas.style.width = `${width}px`;
 canvas.style.height = `${height}px`;
 
 // for sprites scaled up to retina resolution
-c.mozImageSmoothingEnabled = false;
+canvas.mozImageSmoothingEnabled = false;
 canvas.imageSmoothingEnabled = false;
 
 c.scale(pixelRatio, pixelRatio);
