@@ -1,8 +1,7 @@
 #rotateMode{
   border-radius: 50%;
-  width: 325px;
-  height: 325px;
-  background-color: rgb(35, 165, 79);
+  width: 536px;
+  height: 379px;
   color:white;
   position:relative;
  
@@ -10,26 +9,32 @@
 
 #middle{
   position:absolute;
-  top:50%;
-  left:122px;
+  top:60%;
+  left:227px;
   transform:translateY(-50%);
-  border-radius: 30%;
+  border-radius: 46%;
+  background-color:#009ffd;
+  color: white;
 }
 
 #left{
 	position:absolute;
-  top:50%;
+  top:60%;
   left:0px;
   transform:translateY(-50%);
   border-radius: 27%;
+  background-color:#009ffd;
+  color: white;
 }
 
 #right{
  position:absolute;
-  top:50%;
+  top:60%;
   right:0px;
   transform:translateY(-50%);
   border-radius: 27%;
+  background-color:#009ffd;
+  color: white;
 }
 
 #up{
@@ -38,12 +43,16 @@
   left:50%;
   transform:translateX(-50%);
   border-radius: 27%;
+  background-color: #009ffd;
+  color: white;
 }
 
 #down{
 	position:absolute;
-  bottom:0px;
+  top: 90%;
   left:50%;
   transform:translateX(-50%);
   border-radius: 27%;
+  background-color: #009ffd;
+  color: white;
 }
