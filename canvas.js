@@ -154,7 +154,6 @@ function leftKeyReleased() {
 
 function rightKeyPressed() {
   keys[39] = true;
-  e.preventDefault();
 }
 
 function rightKeyReleased() {
