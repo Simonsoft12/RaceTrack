@@ -46,7 +46,7 @@
 
     <div class="circleBase" id="rotateMode" style="margin:0 auto;">
         <button id="left" onmousedown="leftKeyPressed()" onmouseup="leftKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
-        <button id="right" onmouseover="rightKeyPressed()" onmouseout="rightKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        <button id="right" onclick="startup()" onmouseout="rightKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
         <button id="middle" onclick="bulletsPush()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-record"></span></button>
         <button id="up" onmousedown="upKeyPressed()" onmouseup="upKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
         <button id="down" onmousedown="downKeyPressed()" onmouseup="downKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
@@ -59,7 +59,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="canvas.js"></script>
 
-    
+ 
 
 </body>
 

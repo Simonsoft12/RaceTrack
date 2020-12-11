@@ -336,3 +336,18 @@ function update() {
 function draw() {
   drawBox(player);
 }
+
+function startup() {
+  var el = document.getElementsByTagName("ltpcanvas")[0];
+  el.addEventListener("touchstart", handleStart, false);
+  el.addEventListener("touchend", handleEnd, false);
+  console.log("initialized.");
+}
+
+function handleStart(evt) {
+  rightKeyPressed();
+}
+
+function handleEnd(evt) {
+  rightKeyReleased();
+}
