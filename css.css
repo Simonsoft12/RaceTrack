@@ -11,8 +11,9 @@
 #middle{
   position:absolute;
   top:50%;
-  left:145px;
+  left:122px;
   transform:translateY(-50%);
+  border-radius: 30%;
 }
 
 #left{
@@ -20,6 +21,7 @@
   top:50%;
   left:0px;
   transform:translateY(-50%);
+  border-radius: 27%;
 }
 
 #right{
@@ -27,13 +29,15 @@
   top:50%;
   right:0px;
   transform:translateY(-50%);
+  border-radius: 27%;
 }
 
 #up{
-	 position:absolute;
+	position:absolute;
   top:0px;
   left:50%;
   transform:translateX(-50%);
+  border-radius: 27%;
 }
 
 #down{
@@ -41,4 +45,5 @@
   bottom:0px;
   left:50%;
   transform:translateX(-50%);
+  border-radius: 27%;
 }
