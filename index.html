@@ -31,7 +31,7 @@
     </style>
 </head>
 
-<body>
+<body onload="init()">
     <br/>
     <a style ="font-size: 25px; margin-left: 3%;" href="https://simonsoft12.github.io/RaceTrack/"><b>html - github pages</b></a>
     
@@ -45,11 +45,11 @@
     </div>
 
     <div class="circleBase" id="rotateMode" style="margin:0 auto;">
-        <button id="left" onmousedown="leftKeyPressed()" onmouseup="leftKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
-        <button id="right" onclick="startup()" onmouseout="rightKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
+        <button id="left" onclick="leftKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span></button>
+        <button id="right" onmousedown="rightKeyPressed();" ontouchend="rightKeyReleased()" ontouchstart="rightKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-right"></span></button>
         <button id="middle" onclick="bulletsPush()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon glyphicon-record"></span></button>
-        <button id="up" onmousedown="upKeyPressed()" onmouseup="upKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
-        <button id="down" onmousedown="downKeyPressed()" onmouseup="downKeyReleased()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
+        <button id="up" onclick="upKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span></button>
+        <button id="down" onclick="downKeyPressed()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-down"></span></button>
     </div>
     
     
@@ -59,7 +59,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="canvas.js"></script>
 
+    <script type="text/javascript">
+        var can, ctx, canX, canY, mouseIsDown = 0;
  
+        function init() {
+            can = document.getElementById("lptcanvas");
+            ctx = can.getContext("2d");
+ 
+            can.addEventListener("mousedown", mouseDown, false);
+            can.addEventListener("mousemove", mouseXY, false);
+            can.addEventListener("touchstart", touchDown, false);
+            can.addEventListener("touchend", touchUp, false);
+        }
+
+        function mouseDown() {
+            rightKeyPressed();
+        }
+ 
+        function mouseUp() {
+            ightKeyPressed();
+        }
+
+        function touchDown() {
+            rightKeyPressed();
+        }
+ 
+        function touchUp() {
+            ightKeyPressed();
+        }
+    </script>
+
 
 </body>
 
