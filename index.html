@@ -59,22 +59,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="canvas.js"></script>
 
-    <script>
-        window.onload = function(){
-            init();
-            window.addEventListener('resize', init, false);
-        }
-        function init(){
-            var ltpc = document.getElementById('ltpcanvas');
-            var context = ltpc.getContext('2d');
-            var myWidth = window.innerWidth;
-            var myHeight = window.innerHeight;
-            context.canvas.width = myWidth;
-            context.canvas.height = myHeight;
-            context.fillStyle = '#00FFFF';
-            context.fillRect(0,0,myWidth, myHeight);
-        }
-        </script>
+    
 
 </body>
 
