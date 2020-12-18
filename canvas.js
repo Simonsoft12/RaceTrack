@@ -7,7 +7,7 @@ var boundaryTopOffset = 5;
 var boundaryLeftOffset = 2; 
 var boundaryPadding = 50;
 var boundaryMiddleOffset = 2;
-var speed = 50;
+var speed = 55;
 let executedTimer = false;
 let dateDiff;
 let currentScore = 0;
@@ -94,9 +94,6 @@ function animate() {
   }
   drawCanvas(boundaryLeftOffset - 2, 0, 800, 600, 'grey');
   cycle = (cycle + linespeed) % totalCycle;
-
-  drawBoundary(leftCurve[0], leftCurve[0].color);
-  leftCurve[0].topOffset+=4;
 
   for (boundary of [leftBoundary, rightBoundary, middleBoundary]) {
     for (i = 0; i < boundary.length; i++) {

@@ -41,8 +41,12 @@
         <img id="bullet" src="bullet.png" style="display: none;" />
         <img id="car" src="car.png" style="display: none;" />
 
+        <div id="SplashScreen">
+            <input id="StartButton" type="button" value="Start" style="margin-left:45%;"/>
+        </div>
+
     <div id="container">
-        <canvas id="ltpcanvas"></canvas>
+        <canvas id="ltpcanvas" style="display: none;"></canvas>
     </div>
 
         <br/><br/><br/>
@@ -62,6 +66,13 @@
     <script src="canvas.js"></script>
 
     <script> touchAvailable = false; </script>
+
+    <script>
+        $("#StartButton").click(function () {
+            $("#SplashScreen").hide();
+            $("#ltpcanvas").show();
+        });
+    </script>
 
 </body>
 
