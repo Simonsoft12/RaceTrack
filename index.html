@@ -29,6 +29,94 @@
             border-radius: 10px;
             margin-top: 2px;
         } 
+        .containerB {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding:  10px 0px;
+    width: 240px;
+    margin-left: 45%;
+}
+  
+  .pB {
+    text-align: left;
+    color: #fff;
+    letter-spacing: 0.05em;
+    font-size: 0.8em;
+    margin: 0 0 2em;
+}
+  
+  
+  .btnB {
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 38px;
+    width: 262.5px !important;
+    min-width: 162.5px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+  .btnB:hover {
+    text-decoration: none;
+}
+  
+  /*btn_background*/
+  .effect04 {
+    --uismLinkDisplay: var(--smLinkDisplay, inline-flex);
+    display: var(--uismLinkDisplay);
+    color:black;
+    outline: solid  2px rgba(0,158,227, 0.78);
+    position: relative;
+    transition-duration: 0.4s;
+    overflow: hidden;
+}
+  
+  .effect04::before,
+  .effect04 span{
+      margin: 0 auto;
+      transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+      transition-duration: 0.4s;
+}
+  
+  /* 1 */
+  .effect04:hover{
+  
+    background-color: transparent;
+}
+  
+  /* HOVER */
+  .effect04:hover span{
+    color: transparent;
+    -webkit-transform: translateY(-400%) scale(-0.1,10);
+            transform: translateY(-400%) scale(-0.1,10);
+}
+  
+  /* 2 */
+  .effect04::before{ 
+    content: attr(data-sm-link-text);
+    color: black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    -webkit-transform: translateY(500%) scale(-0.1,10);
+            transform: translateY(500%) scale(-0.1,10);
+}
+  
+  /* HOVER */
+  .effect04:hover::before{
+    letter-spacing: 0.05em;
+    -webkit-transform: translateY(0) scale(1,1);
+            transform: translateY(0) scale(1,1);
+}
     </style>
 </head>
 
@@ -42,7 +130,9 @@
         <img id="car" src="car.png" style="display: none;" />
 
         <div id="SplashScreen">
-            <input id="StartButton" type="button" value="Start" style="margin-left:45%;"/>
+            <div class="containerB">
+                <a id="StartButton" class="btnB effect04" data-sm-link-text="Lets go !"><span>Start!</span></a>
+            </div>
         </div>
 
     <div id="container">
