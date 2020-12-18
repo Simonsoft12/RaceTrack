@@ -11,8 +11,11 @@ var speed = 55;
 let executedTimer = false;
 let dateDiff;
 let currentScore = 0;
-let linespeed = 4;
 var cycle = 0, totalCycle = LineHeight + boundaryPadding;
+
+let linespeed = 4;
+var speedBonus = 5;
+var speedObstacle = 5;
 
 var leftBoundary = [];
 var rightBoundary = [];
@@ -195,6 +198,18 @@ function drawCanvas(posX, posY, width, height, elementColor) {
   c.fillRect(posX, posY, width, height);
 }
 
+function faster(){
+  linespeed++;
+  speedBonus++;
+  speedObstacle++;
+}
+
+function slower(){
+  linespeed--;
+  speedBonus--;
+  speedObstacle--;
+}
+
 function timerStart() {
   date1  = new Date();
   executedTimer = true;
@@ -218,7 +233,7 @@ function drawObstacle() {
     for (i = 0; i < obstacles.length; i++) {
       if (obstacles.hasOwnProperty(i)) {
         var image = document.getElementById("obstacle");
-        c.drawImage(image, obstacle[i].x, obstacle[i].y+= 5);
+        c.drawImage(image, obstacle[i].x, obstacle[i].y+= speedObstacle);
       }
     }
   }
@@ -229,7 +244,7 @@ function drawBonus() {
     for (i = 0; i < bonuses.length; i++) {
       if (bonuses.hasOwnProperty(i)){
         var image = document.getElementById("bonus");
-        c.drawImage(image, bonuses[i].x, bonuses[i].y+= 5);
+        c.drawImage(image, bonuses[i].x, bonuses[i].y+= speedBonus);
       }
     }
   }
