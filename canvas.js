@@ -202,12 +202,14 @@ function faster(){
   linespeed++;
   speedBonus++;
   speedObstacle++;
+  e.preventDefault();
 }
 
 function slower(){
   linespeed--;
   speedBonus--;
   speedObstacle--;
+  e.preventDefault();
 }
 
 function timerStart() {
