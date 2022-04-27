@@ -1,4 +1,6 @@
-# Simple RaceTrack Game
+<b>Simple RaceTrack Game.</b>
+
+# How to begin:
 
 1. Open link.
 2. Allow necessary permissions.
